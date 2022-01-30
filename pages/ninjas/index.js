@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styles from '../../styles/Jobs.module.css'
 
 export const getStaticProps = async () => {
@@ -14,11 +15,11 @@ const Ninjas = ({ ninjas }) => {
     <div>
       <h1>All ninijas</h1>
       {ninjas.map(({ name, id }) => (
-        <div key={id}>
+        <Link key={id} href={`/ninjas/${id}`}>
           <a className={styles.single}>
             <h3>{name}</h3>
           </a>
-        </div>
+        </Link>
       ))}
     </div>
   )
