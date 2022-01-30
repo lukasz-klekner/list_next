@@ -1,13 +1,25 @@
-const Ninjas = () => {
+import styles from '../../styles/Jobs.module.css'
+
+export const getStaticProps = async () => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/users')
+  const data = await response.json()
+
+  return {
+    props: { ninjas: data },
+  }
+}
+
+const Ninjas = ({ ninjas }) => {
   return (
     <div>
-      <h1>NInja list</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla cumque
-        beatae repudiandae, atque voluptates unde, fuga tenetur amet minima,
-        consequatur incidunt cum culpa. Sunt similique quaerat exercitationem
-        numquam. Aliquid, in?
-      </p>
+      <h1>All ninijas</h1>
+      {ninjas.map(({ name, id }) => (
+        <div key={id}>
+          <a className={styles.single}>
+            <h3>{name}</h3>
+          </a>
+        </div>
+      ))}
     </div>
   )
 }
